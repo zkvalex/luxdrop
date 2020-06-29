@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-language" content="ru" />
+	<meta name="viewport" content="width=1200">
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<meta property="vk:title" content="Открывай бесплатный кейс CS:GO каждый час на WinDrop.ru!">
+	<meta property="vk:description"
+		content="Не пропусти! Переходи по ссылке и участвуй АБСОЛЮТНО БЕСПЛАТНО! Бегом открывать))))">
+	<meta property="vk:text"
+		content="Не пропусти! Переходи по ссылке и участвуй АБСОЛЮТНО БЕСПЛАТНО! Бегом открывать))))">
+	<meta property="vk:url" content="https://windrop.ru/case/free">
+	<meta property="vk:image" content="https://windrop.ru/img/btn_free_case_banner.jpg">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Открывай бесплатный кейс CS:GO каждый час на WinDrop.ru!">
+	<meta property="og:description"
+		content="Не пропусти! Переходи по ссылке и участвуй АБСОЛЮТНО БЕСПЛАТНО! Бегом открывать))))">
+	<meta property="og:site_name" content="WinDrop.ru">
+	<meta property="og:url" content="https://windrop.ru/case/free">
+	<meta property="og:image" content="https://windrop.ru/img/btn_case.jpg">
+	<link media="screen" href="templates/Default/css/main.min.css" type="text/css" rel="stylesheet" />
+
+	<script src="https://use.fontawesome.com/b6ea848141.js" type="text/javascript"></script>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+	<link media="screen" href="/templates/Default/js/flipclock/flipclock.css" type="text/css" rel="stylesheet" />
+	<script src="/templates/Default/js/flipclock/flipclock.min.js" type="text/javascript"></script>
+	<script src="/templates/Default/js/fontawesome.min.js" type="text/javascript"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+	<script src="/templates/Default/js/jssor.slider-23.1.1.mini.js" type="text/javascript"></script>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Кейсы КС ГО, Открытие CS GO кейсов</title>
+	<meta name="description" content="Кейсы КС ГО с моментальной отправкой вещей. Бесплатный кейс каждый час" />
+	<meta name="keywords" content="кейсы кс го, кейсы cs go, вещи кс го, cs кейсы, кейсы csgo, кс го кейсы" />
+</head>
+
+<body>
+	<script type="text/javascript">
+		var user_url = '';
+	</script>
+	<!-- Модальное окно реального выигрыша -->
+	<div class="modal modal-payment" id="modal-payment">
+
+		<h1>Пополнение баланса</h1>
+
+		<div id="headers">
+			<h2 id="weapon_name">
+				0 <i class="fa fa-rub"></i>
+			</h2>
+			<h3>Ваш текущий баланс</h3>
+		</div>
+		<div class="alert-red" id="not-enought-money" style="display: none;">
+			У вас недостаточно денег на балансе для открытия кейса
+			<h3>Введите сумму для пополнения:</h3>
+		</div>
+		<form method="post" action="" onsubmit="unitpay(); return false;">
+
+			<div class="sum">
+				<button type="button" class="btn btn-red" onclick="change_sum( '-' );">
+					<span class="icon"></span>
+				</button>
+
+				<input type="text" name="sum" value="Введите сумму пополнения" class="sum" id="sum"
+					onfocus="if( this.value == 'Введите сумму пополнения') this.value = ''; else if( this.value == '' ) this.value='0'; $(this).addClass('focused');"
+					onblur="if( this.value == '' ) { this.value='Введите сумму пополнения'; $(this).removeClass('focused'); }"
+					maxlength="6" />
+
+				<button type="button" class="btn btn-red" onclick="change_sum( '+' );">
+					<span class="icon"></span>
+				</button>
+			</div>
+
+			<input type="hidden" name="action" value="init" />
+
+			<div class="actions">
+				<button type="submit" disabled="disabled" class="btn btn-red"><i class="fa fa-rub"></i>
+					Пополнить</button>
+				<button type="button" class="btn btn-red"><span class="icon-skinpay"></span> Скинами</button>
+				<div class="clearfix"></div>
+			</div>
+
+		</form>
+
+		<div class="bonuses">
+			<h4>Бонусы при пополнении баланса</h4>
+
+			<div class="bonus">
+				<h5>> 250 <i class="fa fa-rub"></i></h5>
+				<span>5%</span> от суммы пополнения
+			</div>
+
+			<div class="bonus">
+				<h5>> 500 <i class="fa fa-rub"></i></h5>
+				<span>10%</span> от суммы пополнения
+			</div>
+
+			<div class="bonus">
+				<h5>> 1 000 <i class="fa fa-rub"></i></h5>
+				<span>20%</span> от суммы пополнения
+			</div>
+
+			<div class="clearfix"></div>
+
+			<div class="text">Бонус зачисляется на Ваш баланс<br /> сразу же после пополнения</div>
+
+		</div>
+
+	</div>
+	<!-- Модальное окно реального выигрыша -->
+	<div class="modal modal-coupon" id="modal-coupon">
+
+		<h1>Активация промокода</h1>
+		<input type="text" name="coupon" value="" placeholder="Введите промокод" maxlength="15" />
+
+		<div class="actions">
+			<button type="submit" class="btn btn-red" onclick="coupon_activate();">Активировать</button>
+			<div class="clearfix"></div>
+		</div>
+
+		<div class="text" id="text-error"></div>
+		<div class="text text-success" id="text-success"></div>
+
+		<h3>После активации промокода &mdash; деньги начисляются на баланс мгновенно</h3>
+
+	</div>
+	<div class="wrapper">
+
+		<a href="#" class="modal-close"></a>
+		<div class="modal-bg"></div>
+
+		<!-- Header -->
+		<div class="top-menu">
+			<div class="container">
+
+				<a href="/" class="logo"></a>
+
+				<ul>
+					<li><a href="/">Главная</a></li>
+					<li><a href="javascript:;" onclick="modal_open( 'modal-coupon' ); return false;">Промокод</a></li>
+					<li><a href="/faq">FAQ</a></li>
+					<li><a href="/support">Поддержка</a></li>
+				</ul>
+
+
+
+
+				<div class="pers__info">
+					<div class="pers__info_photo">
+						<img src="./templates/Default/images/avatar_header.png" alt="avatar">
+					</div>
+					<div class="pers__info_name">
+						<div class="pers__title">KomandiR</div>
+						<div class="pers__subtitle">3708 ₽</div>
+					</div>
+					<div class="pers__info_add">
+						<a href="#" class="pers__exit"><img src="./templates/Default/images/logout.svg" alt="exit"></a>
+						<a href="#" class="pers__fill">Пополнить</a>
+					</div>
+				</div>
+
+
+				<div class="links">
+					<a href="https://vk.com/luxdrop" rel="nofollow" class="link-vk" target="_blank">
+						<span></span>
+						Мы в ВК
+					</a>
+				</div>
+
+			</div>
+		</div>
+		<div id="slider">
+			<div data-u="slides" id="slider-slides">
+				<div>
+					<div class="slider" onclick="window.open('https://vk.com/wall-145470431_16', '_blank');">
+						<div class="container">
+							<h1 class="darimbabki">Дарим деньги при<br />пополнении баланса</h1>
+							<div class="text">Пополняй баланс на сумму от 250 руб<br />и получай в подарок до 10 000 руб
+							</div>
+							<a href="#" class="button">Подробнее об акции</a>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<div class="slider slider-2" onclick="window.open('https://vk.com/wall-145470431_17', '_blank');">
+						<div class="container">
+							<h1>Кейс в подарок</h1>
+							<div class="text">Открой 5 любых одинаковых кейсов &mdash;<br />получи 6-й абсолютно
+								бесплатно</div>
+							<a href="#" class="button">Подробнее об акции</a>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<div class="slider slider-3" onclick="window.open('https://vk.com/wall-145470431_18', '_blank');">
+						<div class="container">
+							<h1>Дарим 20 <i class="fa fa-rub"></i> на счет!</h1>
+							<div class="text">Просто зарегистрируйся на сайте и<br />вступи в нашу группу ВК. Деньги
+								твои!</div>
+							<a href="#" class="button">Подробнее об акции</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- Arrow Navigator -->
+			<!-- <span data-u="arrowleft" class="jssora22l" data-autocenter="2"></span>
+			<span data-u="arrowright" class="jssora22r" data-autocenter="2"></span> -->
+		</div>
+
+
+		<div class="live-drops">
+			<h3>Live-дропы</h3>
+			<ul id="live-drops">
+				<li class="item-milspec" data-live-drop-id="210137"><a href="/user/76561198291563843/"><img
+							src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpoor-mcjhoyszecC9L7927m7-HnvD8J_WJlzMHu5Yo2urFpYr22gDnqEBqam6gJ9KQdwc_YlGE-VS7wri70Ja_ot2Xnk_reDFK/206x154"
+							height="75" /></a><span class="live-drop-item"><span class="str"></span><span
+							class="item-name">Tec-9 | Смешанный камуфляж</span><em>3.00 <i
+								class="fa fa-rub"></i></em><img src="/uploads/cases/case_56.png" height="60" /><span
+							class="user-nick"><i class="fa fa-user"></i> COSTROMA</span></span></li>
+				<li class="item-milspec" data-live-drop-id="210136"><a href="/user/76561198291563843/"><img
+							src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpouLWzKjhz3MzadDl94dmynZWG2aega-7TkjtQuMMgj7iR9NugiQft-RJtNm-ndoCRIwVvM1jSrwK9kO_xxcjr6R38t40/206x154"
+							height="75" /></a><span class="live-drop-item"><span class="str"></span><span
+							class="item-name">Nova | Карамельное яблоко</span><em>3.90 <i
+								class="fa fa-rub"></i></em><img src="/uploads/cases/case_59.png" height="60" /><span
+							class="user-nick"><i class="fa fa-user"></i> COSTROMA</span></span></li>
+				<li class="item-milspec" data-live-drop-id="210135"><a href="/user/76561198254141045/"><img
+							src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpoor-mcjhoyszecC9L7927m7-HnvD8J_WJlzMHu5Yo2urFpYr22gDnqEBqam6gJ9KQdwc_YlGE-VS7wri70Ja_ot2Xnk_reDFK/206x154"
+							height="75" /></a><span class="live-drop-item"><span class="str"></span><span
+							class="item-name">Tec-9 | Смешанный камуфляж</span><em>3.00 <i
+								class="fa fa-rub"></i></em><img src="/uploads/cases/case_56.png" height="60" /><span
+							class="user-nick"><i class="fa fa-user"></i> Петрович</span></span></li>
+				<li class="item-uncommon" data-live-drop-id="210134"><a href="/user/76561198353331340/"><img
+							src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpopb3wflFf0uL3dTxP7c-1gZO0hPChZujummJW4NE_372Sptmg3gzjrUNvam-icIeVJ1I8N1rX-lTskuzrh8XpucudnyAwvz5iuygR9uL9aQ/206x154"
+							height="75" /></a><span class="live-drop-item"><span class="str"></span><span
+							class="item-name">SG 553 | Дамасская сталь</span><em>4.74 <i class="fa fa-rub"></i></em><img
+							src="/uploads/cases/case_56.png" height="60" /><span class="user-nick"><i
+								class="fa fa-user"></i> ШаТун</span></span></li>
+				<li class="item-uncommon" data-live-drop-id="210133"><a href="/user/76561198035958015/"><img
+							src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou7uifDhoyszPdDJP6ciknYO0hOPxI6jukXlU7ctOguzA45W72Q3k_hdpYm-iIYSddQc-YVyD-lK7l-3v1p-56MiYz3RquCV2sHvfzQv330-hLT2elw/206x154"
+							height="75" /></a><span class="live-drop-item"><span class="str"></span><span
+							class="item-name">MAG-7 | Антитерраса</span><em>163.67 <i class="fa fa-rub"></i></em><img
+							src="/uploads/cases/case_66.png" height="60" /><span class="user-nick"><i
+								class="fa fa-user"></i> Anton.St</span></span></li>
+				<li class="item-none" data-live-drop-id="210132"><a href="/user/76561198254141045/"><img
+							src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpouLWzKjhz3MzbcDNG09C_k4if2aSna-6FwzsJu5Ypj-uVrdyk2wzkqEQ4ZD3wJo7DcAQ2ZAmE-QC5xejxxcjrmUdg9dQ/206x154"
+							height="75" /></a><span class="live-drop-item"><span class="str"></span><span
+							class="item-name">Nova | Песчаные дюны</span><em>4.20 <i class="fa fa-rub"></i></em><img
+							src="/uploads/cases/case_59.png" height="60" /><span class="user-nick"><i
+								class="fa fa-user"></i> Петрович</span></span></li>
+				<li class="item-rare" data-live-drop-id="210131"><a href="/user/76561198251251576/"><img
+							src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf1ObcTjxT0966gYWPqPv9NLPF2DtUvJVziLnEpon33VCx-Bc5Yjv6JoOddwVrYg3UrwK5xOu5jMS6uczXiSw0dJL_lKg/206x154"
+							height="75" /></a><span class="live-drop-item"><span class="str"></span><span
+							class="item-name">★ Нож с лезвием-крюком | Вороненая сталь</span><em>2 555.10 <i
+								class="fa fa-rub"></i></em><img src="/uploads/cases/case_5.png" height="60" /><span
+							class="user-nick"><i class="fa fa-user"></i> NoF3x emerald.gg</span></span></li>
+				<li class="item-restricted" data-live-drop-id="210130"><a href="/user/76561198302212427/"><img
+							src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpos7asPwJfwPz3ZTxM69mknY6OqP_xMq3I2DkG65Vy0rqQ9Imi2A3kqhE5ZG36doPGclQ8M1_V_wLql-q-gZe7uMvXiSw0fugahP8/206x154"
+							height="75" /></a><span class="live-drop-item"><span class="str"></span><span
+							class="item-name">Dual Berettas | Подрыв</span><em>53.77 <i class="fa fa-rub"></i></em><img
+							src="/uploads/cases/case_69.png" height="60" /><span class="user-nick"><i
+								class="fa fa-user"></i> Muffin✞</span></span></li>
+				<li class="item-none" data-live-drop-id="210129"><a href="/user/76561198254141045/"><img
+							src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot6-iFBRv7OPFcgJO5du-gM6OxfakZbnQw28H65Eg2L2RrYin3ADjrkJqYWz0Jo6UdVNrYV3SqAW9366x0l1OAhlP/206x154"
+							height="75" /></a><span class="live-drop-item"><span class="str"></span><span
+							class="item-name">AUG | Наемник</span><em>5.00 <i class="fa fa-rub"></i></em><img
+							src="/uploads/cases/case_59.png" height="60" /><span class="user-nick"><i
+								class="fa fa-user"></i> Петрович</span></span></li>
+				<li class="item-none" data-live-drop-id="210128"><a href="/user/76561198254141045/"><img
+							src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot6-iFBRv7OPFcgJO5du-gM6OxfakZbnQw28H65Eg2L2RrYin3ADjrkJqYWz0Jo6UdVNrYV3SqAW9366x0l1OAhlP/206x154"
+							height="75" /></a><span class="live-drop-item"><span class="str"></span><span
+							class="item-name">AUG | Наемник</span><em>5.00 <i class="fa fa-rub"></i></em><img
+							src="/uploads/cases/case_59.png" height="60" /><span class="user-nick"><i
+								class="fa fa-user"></i> Петрович</span></span></li>
+				<li class="item-classified" data-live-drop-id="210127"><a href="/user/76561198194175419/"><img
+							src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposr-kLAtl7PLZTjlH_9mkgIWKkPvxDLDEm2JS4Mp1mOjG-oLKhF2zowcDPzixc9OLcw82ZlyF8wC8wb251MW4tcifmydi7CEn4HiPlhyy1BxJbeNshqPIHELeWfJvK5CfiA/206x154"
+							height="75" /></a><span class="live-drop-item"><span class="str"></span><span
+							class="item-name">Desert Eagle | Дракон-предводитель</span><em>123.94 <i
+								class="fa fa-rub"></i></em><img src="/uploads/cases/case_29.png" height="60" /><span
+							class="user-nick"><i class="fa fa-user"></i> DistolT</span></span></li>
+				<li class="item-uncommon" data-live-drop-id="210126"><a href="/user/76561198254141045/"><img
+							src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou7umeldf0uL3fDxB043mq4GHnvL6DLjQm2Ru5cB1g_zMu9-hjAfk8kJpMW3zdYOSJgE6YVCErwC5kry-hZK5u8vNyXpjuici4n_D30vgGysqe2g/206x154"
+							height="75" /></a><span class="live-drop-item"><span class="str"></span><span
+							class="item-name">MAC-10 | Плотоядный</span><em>11.60 <i class="fa fa-rub"></i></em><img
+							src="/uploads/cases/case_1.png" height="60" /><span class="user-nick"><i
+								class="fa fa-user"></i> Петрович</span></span></li>
+				<li class="item-uncommon" data-live-drop-id="210125"><a href="/user/76561198254141045/"><img
+							src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpotLO_JAlf1OD3YS197tWsm460n_bmJb7Cgm5D18h0juDU-MLzjFe1_kJvZminco_GdFNtaQ2GrAO3lLu51p64upXJyyNk6SUk436OgVXp1q-ikIml/206x154"
+							height="75" /></a><span class="live-drop-item"><span class="str"></span><span
+							class="item-name">ПП-19 Бизон | Жнец</span><em>9.70 <i class="fa fa-rub"></i></em><img
+							src="/uploads/cases/case_1.png" height="60" /><span class="user-nick"><i
+								class="fa fa-user"></i> Петрович</span></span></li>
+				<li class="item-none" data-live-drop-id="210124"><a href="/user/76561198532463921/"><img
+							src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposem2LFZfwOP3ZTxS6eOlnI-Zg8j-JrXWmm5u5Mx2gv2Ppd7zjATirxFkNWD2JIGde1Q4MlyCrAe8x-u705a6uJ7Aynph6SUq4GGdwUKYnSlmwg/206x154"
+							height="75" /></a><span class="live-drop-item"><span class="str"></span><span
+							class="item-name">G3SG1 | Тропическая штриховка</span><em>4.70 <i
+								class="fa fa-rub"></i></em><img src="/uploads/cases/case_60.png" height="60" /><span
+							class="user-nick"><i class="fa fa-user"></i> Dovahkiin</span></span></li>
+			</ul>
+		</div>
+
+
+
+		<div class="cases">
+
+			<div class="container">
+
+				<h1>ЭКСКЛЮЗИВНЫЕ КЕЙСЫ</h1>
+				<div class='case case-1'>
+					<a href='/case/armeyskoe/'>
+						<img src='/uploads/cases/case_1.png' alt='Армейское' />
+						<div class='price'>
+							29 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 29 <i class='fa fa-rub'></i></button>
+						<h3>Армейское</h3>
+					</a>
+				</div>
+				<div class='case case-2'>
+					<a href='/case/zapreschennoe/'>
+						<img src='/uploads/cases/case_2.png' alt='Запрещенное' />
+						<div class='price'>
+							129 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 129 <i class='fa fa-rub'></i></button>
+						<h3>Запрещенное</h3>
+					</a>
+				</div>
+				<div class='case case-3'>
+					<a href='/case/zasekrechennoe/'>
+						<img src='/uploads/cases/case_3.png' alt='Засекреченное' />
+						<div class='price'>
+							249 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 249 <i class='fa fa-rub'></i></button>
+						<h3>Засекреченное</h3>
+					</a>
+				</div>
+				<div class='case case-4'>
+					<a href='/case/taynoe/'>
+						<img src='/uploads/cases/case_4.png' alt='Тайное' />
+						<div class='price'>
+							499 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 499 <i class='fa fa-rub'></i></button>
+						<h3>Тайное</h3>
+					</a>
+				</div>
+				<div class='case case-5'>
+					<a href='/case/nozh/'>
+						<img src='/uploads/cases/case_5.png' alt='Нож' />
+						<div class='price'>
+							4499 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 4499 <i class='fa fa-rub'></i></button>
+						<h3>Нож</h3>
+					</a>
+				</div>
+				<div class='case case-6'>
+					<a href='/case/ucp-s/'>
+						<img src='/uploads/cases/case_6.png' alt='UCP-S' />
+						<div class='price'>
+							79 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 79 <i class='fa fa-rub'></i></button>
+						<h3>UCP-S</h3>
+					</a>
+				</div>
+				<div class='case case-7'>
+					<a href='/case/glock-18/'>
+						<img src='/uploads/cases/case_7.png' alt='Glock-18' />
+						<div class='price'>
+							79 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 79 <i class='fa fa-rub'></i></button>
+						<h3>Glock-18</h3>
+					</a>
+				</div>
+				<div class='case case-8'>
+					<a href='/case/desert-eagle/'>
+						<img src='/uploads/cases/case_8.png' alt='Desert Eagle' />
+						<div class='price'>
+							79 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 79 <i class='fa fa-rub'></i></button>
+						<h3>Desert Eagle</h3>
+					</a>
+				</div>
+				<div class='case case-9'>
+					<a href='/case/m4a4/'>
+						<img src='/uploads/cases/case_9.png' alt='M4A4' />
+						<div class='price'>
+							199 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 199 <i class='fa fa-rub'></i></button>
+						<h3>M4A4</h3>
+					</a>
+				</div>
+				<div class='case case-10'>
+					<a href='/case/m4a1-s/'>
+						<img src='/uploads/cases/case_10.png' alt='M4A1-S' />
+						<div class='price'>
+							299 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 299 <i class='fa fa-rub'></i></button>
+						<h3>M4A1-S</h3>
+					</a>
+				</div>
+				<div class='case case-11'>
+					<a href='/case/ak-47/'>
+						<img src='/uploads/cases/case_11.png' alt='AK-47' />
+						<div class='price'>
+							299 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 299 <i class='fa fa-rub'></i></button>
+						<h3>AK-47</h3>
+					</a>
+				</div>
+				<div class='case case-12'>
+					<a href='/case/awp/'>
+						<img src='/uploads/cases/case_12.png' alt='AWP' />
+						<div class='price'>
+							299 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 299 <i class='fa fa-rub'></i></button>
+						<h3>AWP</h3>
+					</a>
+				</div>
+				<div class='case case-13'>
+					<a href='/case/tec-9/'>
+						<img src='/uploads/cases/case_13.png' alt='TEC-9' />
+						<div class='price'>
+							79 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 79 <i class='fa fa-rub'></i></button>
+						<h3>TEC-9</h3>
+					</a>
+				</div>
+				<div class='case case-14'>
+					<a href='/case/p90/'>
+						<img src='/uploads/cases/case_14.png' alt='P90' />
+						<div class='price'>
+							79 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 79 <i class='fa fa-rub'></i></button>
+						<h3>P90</h3>
+					</a>
+				</div>
+				<div class='case case-15'>
+					<a href='/case/aug/'>
+						<img src='/uploads/cases/case_15.png' alt='AUG' />
+						<div class='price'>
+							79 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 79 <i class='fa fa-rub'></i></button>
+						<h3>AUG</h3>
+					</a>
+				</div>
+				<div class='case case-16'>
+					<a href='/case/dragon-lor-ili-chervyak/'>
+						<img src='/uploads/cases/case_16.png' alt='Драгон лор или червяк' />
+						<div class='price'>
+							1999 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 1999 <i class='fa fa-rub'></i></button>
+						<h3>Драгон лор или червяк</h3>
+					</a>
+				</div>
+				<div class='case case-17'>
+					<a href='/case/luxdrop-gold/'>
+						<img src='/uploads/cases/case_17.png' alt='Золотой LuxDrop кейс' />
+						<div class='price'>
+							249 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 249 <i class='fa fa-rub'></i></button>
+						<h3>Золотой LuxDrop кейс</h3>
+					</a>
+				</div>
+				<div class='case case-18'>
+					<a href='/case/luxdrop-silver/'>
+						<img src='/uploads/cases/case_18.png' alt='Серебряный LuxDrop кейс' />
+						<div class='price'>
+							149 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 149 <i class='fa fa-rub'></i></button>
+						<h3>Серебряный LuxDrop кейс</h3>
+					</a>
+				</div>
+				<div class='case case-19'>
+					<a href='/case/luxdrop-bronze/'>
+						<img src='/uploads/cases/case_19.png' alt='Бронзовый LuxDrop кейс' />
+						<div class='price'>
+							79 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 79 <i class='fa fa-rub'></i></button>
+						<h3>Бронзовый LuxDrop кейс</h3>
+					</a>
+				</div>
+				<div class='case case-20'>
+					<a href='/case/perchatki/'>
+						<img src='/uploads/cases/case_22.png' alt='Перчатки' />
+						<div class='price'>
+							9990 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 9990 <i class='fa fa-rub'></i></button>
+						<h3>Перчатки</h3>
+					</a>
+				</div>
+				<div class='clearfix'></div>
+				<h1>СТАНДАРТНЫЕ КЕЙСЫ</h1>
+				<div class='case case-21'>
+					<a href='/case/glove-case/'>
+						<img src='/uploads/cases/case_25.png' alt='Glove Case' />
+						<div class='price'>
+							149 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 149 <i class='fa fa-rub'></i></button>
+						<h3>Glove Case</h3>
+					</a>
+				</div>
+				<div class='case case-22'>
+					<a href='/case/gamma-keys-2/'>
+						<img src='/uploads/cases/case_26.png' alt='Гамма Кейс 2' />
+						<div class='price'>
+							139 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 139 <i class='fa fa-rub'></i></button>
+						<h3>Гамма Кейс 2</h3>
+					</a>
+				</div>
+				<div class='case case-23'>
+					<a href='/case/gamma-keys/'>
+						<img src='/uploads/cases/case_27.png' alt='Гамма Кейс' />
+						<div class='price'>
+							115 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 115 <i class='fa fa-rub'></i></button>
+						<h3>Гамма Кейс</h3>
+					</a>
+				</div>
+				<div class='case case-24'>
+					<a href='/case/hromirovannyy-keys-3/'>
+						<img src='/uploads/cases/case_28.png' alt='Хромированный кейс 3' />
+						<div class='price'>
+							99 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 99 <i class='fa fa-rub'></i></button>
+						<h3>Хромированный кейс 3</h3>
+					</a>
+				</div>
+				<div class='case case-25'>
+					<a href='/case/keys-dikoe-plamya/'>
+						<img src='/uploads/cases/case_29.png' alt='Кейс Дикое пламя' />
+						<div class='price'>
+							129 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 129 <i class='fa fa-rub'></i></button>
+						<h3>Кейс Дикое пламя</h3>
+					</a>
+				</div>
+				<div class='case case-26'>
+					<a href='/case/revolvernyy-keys/'>
+						<img src='/uploads/cases/case_30.png' alt='Револьверный кейс' />
+						<div class='price'>
+							89 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 89 <i class='fa fa-rub'></i></button>
+						<h3>Револьверный кейс</h3>
+					</a>
+				</div>
+				<div class='case case-27'>
+					<a href='/case/keys-operacii-bravo/'>
+						<img src='/uploads/cases/case_31.png' alt='Кейс операции «Браво»' />
+						<div class='price'>
+							89 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 89 <i class='fa fa-rub'></i></button>
+						<h3>Кейс операции «Браво»</h3>
+					</a>
+				</div>
+				<div class='case case-28'>
+					<a href='/case/temnyy-keys/'>
+						<img src='/uploads/cases/case_32.png' alt='Темный кейс' />
+						<div class='price'>
+							99 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 99 <i class='fa fa-rub'></i></button>
+						<h3>Темный кейс</h3>
+					</a>
+				</div>
+				<div class='case case-29'>
+					<a href='/case/keys-operacii-proryv/'>
+						<img src='/uploads/cases/case_33.png' alt='Кейс операции «Прорыв»' />
+						<div class='price'>
+							99 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 99 <i class='fa fa-rub'></i></button>
+						<h3>Кейс операции «Прорыв»</h3>
+					</a>
+				</div>
+				<div class='case case-30'>
+					<a href='/case/hromirovannyy-keys/'>
+						<img src='/uploads/cases/case_34.png' alt='Хромированный кейс' />
+						<div class='price'>
+							99 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 99 <i class='fa fa-rub'></i></button>
+						<h3>Хромированный кейс</h3>
+					</a>
+				</div>
+				<div class='case case-31'>
+					<a href='/case/hromirovannyy-keys-2/'>
+						<img src='/uploads/cases/case_35.png' alt='Хромированный кейс 2' />
+						<div class='price'>
+							99 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 99 <i class='fa fa-rub'></i></button>
+						<h3>Хромированный кейс 2</h3>
+					</a>
+				</div>
+				<div class='case case-32'>
+					<a href='/case/keys-esports-2013/'>
+						<img src='/uploads/cases/case_36.png' alt='Кейс eSports 2013' />
+						<div class='price'>
+							129 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 129 <i class='fa fa-rub'></i></button>
+						<h3>Кейс eSports 2013</h3>
+					</a>
+				</div>
+				<div class='case case-33'>
+					<a href='/case/letniy-keys-esports-2014/'>
+						<img src='/uploads/cases/case_37.png' alt='Летний кейс eSports 2014' />
+						<div class='price'>
+							99 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 99 <i class='fa fa-rub'></i></button>
+						<h3>Летний кейс eSports 2014</h3>
+					</a>
+				</div>
+				<div class='case case-34'>
+					<a href='/case/zimniy-keys-esports-2013/'>
+						<img src='/uploads/cases/case_38.png' alt='Зимний кейс eSports 2013' />
+						<div class='price'>
+							99 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 99 <i class='fa fa-rub'></i></button>
+						<h3>Зимний кейс eSports 2013</h3>
+					</a>
+				</div>
+				<div class='case case-35'>
+					<a href='/case/keys-falshion/'>
+						<img src='/uploads/cases/case_39.png' alt='Кейс Фальшион' />
+						<div class='price'>
+							89 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 89 <i class='fa fa-rub'></i></button>
+						<h3>Кейс Фальшион</h3>
+					</a>
+				</div>
+				<div class='case case-36'>
+					<a href='/case/ohotnichiy-keys/'>
+						<img src='/uploads/cases/case_40.png' alt='Охотничий кейс' />
+						<div class='price'>
+							89 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 89 <i class='fa fa-rub'></i></button>
+						<h3>Охотничий кейс</h3>
+					</a>
+				</div>
+				<div class='case case-37'>
+					<a href='/case/keys-operacii-feniks/'>
+						<img src='/uploads/cases/case_41.png' alt='Кейс операции Феникс' />
+						<div class='price'>
+							89 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 89 <i class='fa fa-rub'></i></button>
+						<h3>Кейс операции Феникс</h3>
+					</a>
+				</div>
+				<div class='case case-38'>
+					<a href='/case/keys-operacii-avangard/'>
+						<img src='/uploads/cases/case_42.png' alt='Кейс операции Авангард' />
+						<div class='price'>
+							89 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 89 <i class='fa fa-rub'></i></button>
+						<h3>Кейс операции Авангард</h3>
+					</a>
+				</div>
+				<div class='case case-39'>
+					<a href='/case/oruzheynyy-keys/'>
+						<img src='/uploads/cases/case_43.png' alt='Оружейный кейс' />
+						<div class='price'>
+							129 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 129 <i class='fa fa-rub'></i></button>
+						<h3>Оружейный кейс</h3>
+					</a>
+				</div>
+				<div class='case case-40'>
+					<a href='/case/oruzheynyy-keys-2/'>
+						<img src='/uploads/cases/case_44.png' alt='Оружейный кейс 2' />
+						<div class='price'>
+							99 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 99 <i class='fa fa-rub'></i></button>
+						<h3>Оружейный кейс 2</h3>
+					</a>
+				</div>
+				<div class='case case-41'>
+					<a href='/case/oruzheynyy-keys-3/'>
+						<img src='/uploads/cases/case_45.png' alt='Оружейный кейс 3' />
+						<div class='price'>
+							89 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 89 <i class='fa fa-rub'></i></button>
+						<h3>Оружейный кейс 3</h3>
+					</a>
+				</div>
+				<div class='case case-42'>
+					<a href='/case/keys-winter-offensive/'>
+						<img src='/uploads/cases/case_46.png' alt='Кейс Winter Offensive' />
+						<div class='price'>
+							88 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 88 <i class='fa fa-rub'></i></button>
+						<h3>Кейс Winter Offensive</h3>
+					</a>
+				</div>
+				<div class='case case-43'>
+					<a href='/case/spectrum-case/'>
+						<img src='/uploads/cases/case_80.png' alt='Spectrum Case' />
+						<div class='price'>
+							199 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 199 <i class='fa fa-rub'></i></button>
+						<h3>Spectrum Case</h3>
+					</a>
+				</div>
+				<div class='clearfix'></div>
+				<h1>КОЛЛЕКЦИИ</h1>
+				<div class='case case-44'>
+					<a href='/case/alpha/'>
+						<img src='/uploads/cases/case_47.png' alt='Alpha' />
+						<div class='price'>
+							89 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 89 <i class='fa fa-rub'></i></button>
+						<h3>Alpha</h3>
+					</a>
+				</div>
+				<div class='case case-45'>
+					<a href='/case/assault/'>
+						<img src='/uploads/cases/case_48.png' alt='Assault' />
+						<div class='price'>
+							179 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 179 <i class='fa fa-rub'></i></button>
+						<h3>Assault</h3>
+					</a>
+				</div>
+				<div class='case case-46'>
+					<a href='/case/aztec/'>
+						<img src='/uploads/cases/case_49.png' alt='Aztec' />
+						<div class='price'>
+							39 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 39 <i class='fa fa-rub'></i></button>
+						<h3>Aztec</h3>
+					</a>
+				</div>
+				<div class='case case-47'>
+					<a href='/case/baggage/'>
+						<img src='/uploads/cases/case_50.png' alt='Baggage' />
+						<div class='price'>
+							49 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 49 <i class='fa fa-rub'></i></button>
+						<h3>Baggage</h3>
+					</a>
+				</div>
+				<div class='case case-48'>
+					<a href='/case/bank/'>
+						<img src='/uploads/cases/case_51.png' alt='Bank' />
+						<div class='price'>
+							19 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 19 <i class='fa fa-rub'></i></button>
+						<h3>Bank</h3>
+					</a>
+				</div>
+				<div class='case case-49'>
+					<a href='/case/cache/'>
+						<img src='/uploads/cases/case_52.png' alt='Cache' />
+						<div class='price'>
+							44 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 44 <i class='fa fa-rub'></i></button>
+						<h3>Cache</h3>
+					</a>
+				</div>
+				<div class='case case-50'>
+					<a href='/case/chop-shop/'>
+						<img src='/uploads/cases/case_53.png' alt='Chop Shop' />
+						<div class='price'>
+							89 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 89 <i class='fa fa-rub'></i></button>
+						<h3>Chop Shop</h3>
+					</a>
+				</div>
+				<div class='case case-51'>
+					<a href='/case/cobblestone/'>
+						<img src='/uploads/cases/case_54.png' alt='Cobblestone' />
+						<div class='price'>
+							129 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 129 <i class='fa fa-rub'></i></button>
+						<h3>Cobblestone</h3>
+					</a>
+				</div>
+				<div class='case case-52'>
+					<a href='/case/dust/'>
+						<img src='/uploads/cases/case_55.png' alt='Dust' />
+						<div class='price'>
+							89 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 89 <i class='fa fa-rub'></i></button>
+						<h3>Dust</h3>
+					</a>
+				</div>
+				<div class='case case-53'>
+					<a href='/case/dust-2/'>
+						<img src='/uploads/cases/case_56.png' alt='Dust 2' />
+						<div class='price'>
+							8 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 8 <i class='fa fa-rub'></i></button>
+						<h3>Dust 2</h3>
+					</a>
+				</div>
+				<div class='case case-54'>
+					<a href='/case/gods-and-monsters/'>
+						<img src='/uploads/cases/case_57.png' alt='Gods and Monsters' />
+						<div class='price'>
+							123 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 123 <i class='fa fa-rub'></i></button>
+						<h3>Gods and Monsters</h3>
+					</a>
+				</div>
+				<div class='case case-55'>
+					<a href='/case/inferno/'>
+						<img src='/uploads/cases/case_58.png' alt='Inferno' />
+						<div class='price'>
+							39 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 39 <i class='fa fa-rub'></i></button>
+						<h3>Inferno</h3>
+					</a>
+				</div>
+				<div class='case case-56'>
+					<a href='/case/italy/'>
+						<img src='/uploads/cases/case_59.png' alt='Itаly' />
+						<div class='price'>
+							10 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 10 <i class='fa fa-rub'></i></button>
+						<h3>Itаly</h3>
+					</a>
+				</div>
+				<div class='case case-57'>
+					<a href='/case/lake/'>
+						<img src='/uploads/cases/case_60.png' alt='Lake' />
+						<div class='price'>
+							10 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 10 <i class='fa fa-rub'></i></button>
+						<h3>Lake</h3>
+					</a>
+				</div>
+				<div class='case case-58'>
+					<a href='/case/militia/'>
+						<img src='/uploads/cases/case_61.png' alt='Militia' />
+						<div class='price'>
+							89 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 89 <i class='fa fa-rub'></i></button>
+						<h3>Militia</h3>
+					</a>
+				</div>
+				<div class='case case-59'>
+					<a href='/case/mirage/'>
+						<img src='/uploads/cases/case_62.png' alt='Mirage' />
+						<div class='price'>
+							69 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 69 <i class='fa fa-rub'></i></button>
+						<h3>Mirage</h3>
+					</a>
+				</div>
+				<div class='case case-60'>
+					<a href='/case/nuke/'>
+						<img src='/uploads/cases/case_63.png' alt='Nuke' />
+						<div class='price'>
+							89 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 89 <i class='fa fa-rub'></i></button>
+						<h3>Nuke</h3>
+					</a>
+				</div>
+				<div class='case case-61'>
+					<a href='/case/office/'>
+						<img src='/uploads/cases/case_64.png' alt='Office' />
+						<div class='price'>
+							129 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 129 <i class='fa fa-rub'></i></button>
+						<h3>Office</h3>
+					</a>
+				</div>
+				<div class='case case-62'>
+					<a href='/case/overpass/'>
+						<img src='/uploads/cases/case_65.png' alt='Overpass' />
+						<div class='price'>
+							89 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 89 <i class='fa fa-rub'></i></button>
+						<h3>Overpass</h3>
+					</a>
+				</div>
+				<div class='case case-63'>
+					<a href='/case/rising-sun/'>
+						<img src='/uploads/cases/case_66.png' alt='Rising Sun' />
+						<div class='price'>
+							89 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 89 <i class='fa fa-rub'></i></button>
+						<h3>Rising Sun</h3>
+					</a>
+				</div>
+				<div class='case case-64'>
+					<a href='/case/safehouse/'>
+						<img src='/uploads/cases/case_67.png' alt='Safehouse' />
+						<div class='price'>
+							29 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 29 <i class='fa fa-rub'></i></button>
+						<h3>Safehouse</h3>
+					</a>
+				</div>
+				<div class='case case-65'>
+					<a href='/case/train/'>
+						<img src='/uploads/cases/case_68.png' alt='Train' />
+						<div class='price'>
+							10 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 10 <i class='fa fa-rub'></i></button>
+						<h3>Train</h3>
+					</a>
+				</div>
+				<div class='case case-66'>
+					<a href='/case/vertigo/'>
+						<img src='/uploads/cases/case_69.png' alt='Vertigo' />
+						<div class='price'>
+							89 <i class='fa fa-rub'></i>
+						</div>
+						<button type='button'>Открыть за 89 <i class='fa fa-rub'></i></button>
+						<h3>Vertigo</h3>
+					</a>
+				</div>
+				<div class='clearfix'></div>
+			</div>
+		</div>
+
+
+		<script type="text/javascript">
+			$('html, body').animate({
+				scrollTop: $(".live-drops").offset().top
+			}, 0);
+		</script>
+
+		<div class="guarantees">
+
+			<h1 class="guarantees_h1">Гарантии LuxDrop</h1>
+
+			<div class="container">
+
+				<div class="guarantee">
+					<img src="/templates/Default/images/guarantee-1.png" />
+					<h3>Все в наличии</h3>
+					<div class="descr">
+						В продаже присутствуют только те вещи, которые есть в наличии у наших ботов в Steam
+					</div>
+				</div>
+
+				<div class="guarantee">
+					<img src="/templates/Default/images/guarantee-2.png" />
+					<h3>Без обмана</h3>
+					<div class="descr">
+						Мы не вмешиваемся в процесс покупки и откытия кейсов
+					</div>
+				</div>
+
+				<div class="guarantee">
+					<img src="/templates/Default/images/guarantee-3.png" />
+					<h3>Лучшие цены</h3>
+					<div class="descr">
+						Продаем кейсы по самым низким ценам. Никаких комиссий! Возможность продажи вещей по выгодной
+						цене
+					</div>
+				</div>
+
+				<div class="guarantee">
+					<img src="/templates/Default/images/guarantee-4.png" />
+					<h3>Моментальное получение</h3>
+					<div class="descr">
+						Максимально быстрая передача предметов в Steam через собственных ботов в режиме 24/7.
+						Оперативная техподдержка
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+
+		<div class="stats">
+
+			<div class="container">
+
+				<div class="vk-group">
+					<script type="text/javascript" src="//vk.com/js/api/openapi.js?145"></script>
+
+					<div id="vk_groups" style="margin-top: 7px;"></div>
+					<script type="text/javascript">
+						VK.Widgets.Group("vk_groups", {
+							mode: 3,
+							width: "305"
+						}, 145470431);
+					</script>
+				</div>
+
+				<div class="cols">
+
+					<div class="col">
+						<h4>123 456 789</h4>
+						<h5>Всего пользователей</h5>
+					</div>
+
+					<div class="col">
+						<h4>100</h4>
+						<h5>Пользователей онлайн</h5>
+					</div>
+
+					<div class="col">
+						<h4>1</h4>
+						<h5>Ножей за сегодня</h5>
+					</div>
+
+					<div class="col">
+						<h4>1 234 561 231</h4>
+						<h5>Открыто кейсов</h5>
+					</div>
+
+				</div>
+
+				<div class="clearfix"></div>
+
+			</div>
+
+		</div>
+
+		<div class="payments">
+
+			<h1>Любые способы оплаты</h1>
+
+		</div>
+
+		<div class="footer">
+
+			<div class="container">
+
+				<div class="copyright">© 2015-2017 LuxDrop</div>
+
+				<ul>
+					<li><a href="/">Главная</a></li>
+					<li><a href="#" onclick="modal_open( 'modal-coupon' ); return false;">Промокод</a></li>
+					<li><a href="/faq.html">FAQ</a></li>
+					<li><a href="/support.html">Поддержка</a></li>
+					<li><a href="/rules.html">Пользовательское соглашение</a></li>
+				</ul>
+
+				<div class="links">
+					<a href="https://vk.com/luxdrop" rel="nofollow" class="link-vk" target="_blank">
+						<span></span>
+						Мы в ВК
+					</a>
+				</div>
+
+			</div>
+
+			<div class="clearfix"></div>
+
+		</div>
+	</div>
+	<!--noindex-->
+	<script src="/templates/Default/js/functions.min.js?v=60" type="text/javascript"></script>
+
+	<div style="display:none;">
+		<audio preload="" id="case_open">
+			<source src="/templates/Default/sounds/case_open.wav" type="audio/wav">
+		</audio>
+		<audio preload="" id="case_scroll">
+			<source src="/templates/Default/sounds/case_scroll.wav" type="audio/wav">
+		</audio>
+		<audio preload="" id="item_reveal">
+			<source src="/templates/Default/sounds/item_reveal.wav" type="audio/wav">
+		</audio>
+	</div>
+	<!--/noindex-->
+</body>
+
+</html>
